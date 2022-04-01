@@ -1,0 +1,49 @@
+!Initial configuration
+!By Rodrigo Noriega
+!
+enable
+configure terminal
+hostname SW1
+no ip domain-lookup
+service password-encryption
+enable secret c1sc0
+lldp run
+banner motd #
+Welcome to the RN Network! #
+!
+vlan 7
+name Engineering
+exit
+!
+vlan 8
+name R&D
+exit
+!
+interface range fastethernet0/1-2
+speed auto
+duplex auto
+switchport mode access
+switchport access vlan 7
+no shutdown
+exit
+!
+interface range fastethernet0/3-4
+speed auto
+duplex auto
+switchport mode access
+switchport access vlan 8
+no shutdown
+!
+line console 0
+password cisco
+login
+motd-banner
+exit
+!
+line vty 0 15
+password cisco
+login
+motd-banner
+exit
+!
+end
